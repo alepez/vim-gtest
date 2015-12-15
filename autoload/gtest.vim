@@ -50,14 +50,16 @@ function! gtest#GTestCase(test_case)
 endfunction
 
 function! gtest#GTestName(test_name)
-  let g:gtest#test_case = a:test_name
+  let g:gtest#test_name = a:test_name
 endfunction
 
 function! gtest#ListTestCases(A, L, P)
+  " FIXME naive implementation with system and sed. Use vim builtin instead
   return system(g:gtest#gtest_command . " --gtest_list_tests | sed '/^ /d' | sed 's/\.$//' | sed '/main\(\)/d'")
 endfunction
 
 function! gtest#ListTestNames(A, L, P)
-  
+  " FIXME naive implementation with system and sed. Use vim builtin instead
+  return system(g:gtest#gtest_command . " --gtest_filter='" . g:gtest#test_case . ".*' --gtest_list_tests | sed '/^[^ ]/d' | sed 's/^  //'")
 endfunction
 " }}}
