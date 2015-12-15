@@ -15,8 +15,8 @@ let g:loaded_gtest = 1
 
 " Commands {{{
 command! -nargs=0 GTestRun call gtest#GTestRun()
-command! -nargs=1 GTestCase call gtest#GTestCase(<f-args>)
-command! -nargs=1 GTestName call gtest#GTestName(<f-args>)
+command! -nargs=1 -complete=custom,gtest#ListTestCases GTestCase call gtest#GTestCase(<f-args>)
+command! -nargs=1 -complete=custom,gtest#ListTestNames GTestName call gtest#GTestName(<f-args>)
 command! -nargs=1 -complete=file GTestCmd call gtest#GTestCmd(<f-args>)
 " }}}
 

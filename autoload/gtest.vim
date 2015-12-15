@@ -52,4 +52,12 @@ endfunction
 function! gtest#GTestName(test_name)
   let g:gtest#test_case = a:test_name
 endfunction
+
+function! gtest#ListTestCases(A, L, P)
+  return system(g:gtest#gtest_command . " --gtest_list_tests | sed '/^ /d' | sed 's/\.$//' | sed '/main\(\)/d'")
+endfunction
+
+function! gtest#ListTestNames(A, L, P)
+  
+endfunction
 " }}}
