@@ -1,0 +1,12 @@
+*gtest.txt*  Run gtest inside vim
+
+Author:  Alessandro Pezzato <http://pezzato.net/>
+License: Same terms as Vim itself (see |license|)
+
+This plugin is only available if 'compatible' is not set.
+
+INTRODUCTION                                               *gtest_introduction*
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
