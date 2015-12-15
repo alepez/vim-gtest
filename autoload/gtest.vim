@@ -21,12 +21,16 @@ endif
 " }}}
 
 " Private functions {{{
+function! s:GetMiscArguments()
+  return "--gtest_print_time=0"
+endfunction
+
 function! s:GetFilters()
   return "--gtest_filter='" . g:gtest#test_case . "." . g:gtest#test_name . "'"
 endfunction
 
 function! s:GetArguments()
-  return s:GetFilters()
+  return s:GetMiscArguments() . " " .s:GetFilters()
 endfunction
 
 function! s:GetFullCommand()
