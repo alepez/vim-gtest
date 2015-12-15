@@ -40,4 +40,16 @@ endfunction
 function! gtest#GTestRun()
   call VimuxRunCommand(s:GetFullCommand())
 endfunction
+
+function! gtest#GTestCmd(gtest_command)
+  let g:gtest#gtest_command = a:gtest_command
+endfunction
+
+function! gtest#GTestCase(test_case)
+  let g:gtest#test_case = a:test_case
+endfunction
+
+function! gtest#GTestName(test_name)
+  let g:gtest#test_case = a:test_name
+endfunction
 " }}}
