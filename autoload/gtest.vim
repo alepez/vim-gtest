@@ -6,6 +6,10 @@
 " Version:     0.1.1
 " ============================================================================
 
+if !exists('g:gtest#gtest_command')
+  let g:gtest#gtest_command = "make test"
+endif
+
 function! gtest#GTestRun()
-	call VimuxRunCommand("( clear && make test )")
+  call VimuxRunCommand("( clear && " . g:gtest#gtest_command . ")")
 endfunction
