@@ -7,7 +7,7 @@
 ### Select gtest command
 
 ```
-GTestCmd path/to/test/executable
+:GTestCmd path/to/test/executable
 ```
 
 ### Select tests by name
