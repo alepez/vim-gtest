@@ -1,4 +1,4 @@
-# vim-test
+# vim-gtest
 
 **Vim plugin to run *GoogleTest* using https://github.com/benmills/vimux**
 
