@@ -18,6 +18,7 @@ command! -nargs=0 GTestRun call gtest#GTestRun()
 command! -nargs=1 -complete=custom,gtest#ListTestCases GTestCase call gtest#GTestCase(<f-args>)
 command! -nargs=1 -complete=custom,gtest#ListTestNames GTestName call gtest#GTestName(<f-args>)
 command! -nargs=1 -complete=file GTestCmd call gtest#GTestCmd(<f-args>)
+command! -nargs=0 GTestNext call gtest#GTestNext()
 " }}}
 
 " vim:set ft=vim sw=2 sts=2:

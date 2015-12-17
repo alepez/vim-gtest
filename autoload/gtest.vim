@@ -75,4 +75,8 @@ function! gtest#GTestName(test_name)
   let g:gtest#test_name = a:test_name
 endfunction
 
+" Find next test in buffer and go to first line in the block
+function! gtest#GTestNext()
+  normal! /^TEST/j^
+endfunction
 " }}}
