@@ -7,14 +7,17 @@
 " ============================================================================
 
 " Options {{{
+" Test case selector, used by --gtest_filter='TestCase.TestName'
 if !exists('g:gtest#test_case')
   let g:gtest#test_case = "*"
 endif
 
+" Test name selector, used by --gtest_filter='TestCase.TestName'
 if !exists('g:gtest#test_name')
   let g:gtest#test_name = "*"
 endif
 
+" Test executable, absolute path or relative to pwd
 if !exists('g:gtest#gtest_command')
   let g:gtest#gtest_command = "./test"
 endif
@@ -38,24 +41,6 @@ function! s:GetFullCommand()
   echom l:cmd
   return "( clear && " . l:cmd . ")"
 endfunction
-" }}}
-
-" Public functions {{{
-function! gtest#GTestRun()
-  call VimuxRunCommand(s:GetFullCommand())
-endfunction
-
-function! gtest#GTestCmd(gtest_command)
-  let g:gtest#gtest_command = a:gtest_command
-endfunction
-
-function! gtest#GTestCase(test_case)
-  let g:gtest#test_case = a:test_case
-endfunction
-
-function! gtest#GTestName(test_name)
-  let g:gtest#test_name = a:test_name
-endfunction
 
 function! gtest#ListTestCases(A, L, P)
   " FIXME naive implementation with system and sed. Use vim builtin instead
@@ -66,4 +51,28 @@ function! gtest#ListTestNames(A, L, P)
   " FIXME naive implementation with system and sed. Use vim builtin instead
   return system(g:gtest#gtest_command . " --gtest_filter='" . g:gtest#test_case . ".*' --gtest_list_tests | sed '/^[^ ]/d' | sed 's/^  //'")
 endfunction
+" }}}
+
+" Public functions {{{
+
+" Run selected executable with filters, inside a tmux pane
+function! gtest#GTestRun()
+  call VimuxRunCommand(s:GetFullCommand())
+endfunction
+
+" Set test executable
+function! gtest#GTestCmd(gtest_command)
+  let g:gtest#gtest_command = a:gtest_command
+endfunction
+
+" Set test case
+function! gtest#GTestCase(test_case)
+  let g:gtest#test_case = a:test_case
+endfunction
+
+" Set test name
+function! gtest#GTestName(test_name)
+  let g:gtest#test_name = a:test_name
+endfunction
+
 " }}}
