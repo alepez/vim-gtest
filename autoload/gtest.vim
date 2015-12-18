@@ -3,7 +3,7 @@
 " Description: Run google test inside vim
 " Maintainer:  Alessandro Pezzato <http://pezzato.net/>
 " License:     The MIT License (MIT)
-" Version:     0.1.1
+" Version:     0.1.2
 " ============================================================================
 
 " Options {{{
