@@ -71,19 +71,25 @@ endf
 fu! s:ParseTests(tests)
   " split to lines, remove the first line
   let l:lines = split(a:tests, '\n')[1:]
-  let l:result = ""
+  let l:result = []
   for l:line in l:lines
     if l:line[0] != ' '
       " Lines not starting with space are test cases
       let l:test_case = l:line
     else
       " Lines starting with space are tests
-      let l:result .= l:test_case . l:line[2:] . "\n"
+      call add(l:result, l:test_case . l:line[2:])
     endif
   endfor
 
   return result
 endf
+
+fu! s:SelectTestByFullName(full)
+  call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
+  call gtest#GTestName(s:GetTestNameFromFull(l:full))
+endf
+
 " }}}
 
 " Public functions {{{
@@ -118,7 +124,7 @@ function! gtest#GTestNext()
   silent normal! /^TEST
 endfunction
 
-" Get the list of all tests, Case1.Test1\nCase1.Test2\nCase2.Test1 etc...
+" Get the list of all tests, [ 'Case1.Test1', 'Case1.Test2', 'Case2.Test1' ...]
 fu! gtest#GetAllTests()
   return s:ParseTests(s:ListTests())
 endf
@@ -127,8 +133,7 @@ endf
 function! gtest#GTestUnderCursor(try_prev)
   let l:full = s:GetTestFullFromLine(getline("."))
   try
-    call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
-    call gtest#GTestName(s:GetTestNameFromFull(l:full))
+    call s:SelectTestByFullName(l:full)
   catch
     if a:try_prev
       " Find test line
@@ -138,6 +143,12 @@ function! gtest#GTestUnderCursor(try_prev)
       normal! ``
     endif
   endtry
+endfunction
+
+" Select and run test by full test name
+function! gtest#GTestRunOnly(full)
+  call s:SelectTestByFullName(a:full)
+  call gtest#GTestRun()
 endfunction
 
 " Select and run test under cursor
