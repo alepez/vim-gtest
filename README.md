@@ -34,12 +34,19 @@ Go to the prev/next test in the current buffer.
 :GTestNext
 ```
 
+### Run test under cursor
+
+```
+:GTestRunUnderCursor
+```
+
 ## Shortcuts
 
 You can map these commands to your favorite shortcuts:
 
 ```
 nnoremap <leader>tt :GTestRun<CR>
+nnoremap <leader>tu :GTestRunUnderCursor<CR>
 nnoremap <leader>tc :GTestCase<space>
 nnoremap <leader>tn :GTestName<space>
 ```
