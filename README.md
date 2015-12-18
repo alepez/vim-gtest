@@ -42,6 +42,15 @@ Go to the prev/next test in the current buffer.
 :GTestRunUnderCursor
 ```
 
+### CtrlP
+
+Don't you know what [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) is?
+
+It's a fantastic fuzzy finder for vim! Try it immediately!
+
+`vim-gtest` extends *ctrlp.vim* with a google test finder. Now you can find
+and launch tests at the speed of light!
+
 ## Shortcuts
 
 You can map these commands to your favorite shortcuts:
