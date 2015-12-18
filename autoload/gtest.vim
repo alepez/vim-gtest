@@ -76,6 +76,8 @@ fu! s:ParseTests(tests)
     if l:line[0] != ' '
       " Lines not starting with space are test cases
       let l:test_case = l:line
+      " Add a special * for each case (all tests in that test case)
+      call add(l:result, l:test_case . "*")
     else
       " Lines starting with space are tests
       call add(l:result, l:test_case . l:line[2:])
