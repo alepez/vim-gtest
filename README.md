@@ -19,7 +19,7 @@ You can select test cases and test name, with autocompletion.
 :GTestName MyTestName
 ```
 
-### Run tests
+### Run selected tests
 
 ```
 :GTestRun
@@ -27,15 +27,16 @@ You can select test cases and test name, with autocompletion.
 
 ### Find tests
 
-Go to the next test in the current buffer.
+Go to the prev/next test in the current buffer.
 
 ```
+:GTestPrev
 :GTestNext
 ```
 
 ## Shortcuts
 
-You can map these commands to your favorite shortcut:
+You can map these commands to your favorite shortcuts:
 
 ```
 nnoremap <leader>tt :GTestRun<CR>

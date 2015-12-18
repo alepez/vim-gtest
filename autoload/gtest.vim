@@ -97,7 +97,7 @@ function! gtest#GTestNext()
   normal! /^TEST
 endfunction
 
-" Select text under cursor
+" Select test under cursor
 function! gtest#GTestUnderCursor(try_prev)
   let l:full = s:GetTestFullFromLine(getline("."))
   try
@@ -112,6 +112,12 @@ function! gtest#GTestUnderCursor(try_prev)
       normal! ``
     endif
   endtry
+endfunction
+
+" Select and run test under cursor
+function! gtest#GTestRunUnderCursor()
+  call gtest#GTestUnderCursor(1)
+  call gtest#GTestRun()
 endfunction
 " }}}
 
