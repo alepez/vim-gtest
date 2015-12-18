@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Launch googletest's test
+# To build the executable, use `make_test`
+
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+
+"${PROJECT_DIR}/test/googletest/googletest/make/sample1_unittest"

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Download and build last googletest library
+
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+TEST_DIR="${PROJECT_DIR}/test"
+GTEST_REPO="${PROJECT_DIR}/test/googletest"
+GTEST_DIR="${GTEST_REPO}/googletest"
+
+# Clone if directory doesn't exist
+if [ ! -d "${GTEST_DIR}" ]; then
+	git clone git@github.com:google/googletest.git "${GTEST_DIR}"
+fi
+
+cd "${GTEST_DIR}"
+
+# Update repository
+git pull
+
+# Build library
+g++ -isystem ${GTEST_DIR}/include -I${GTEST_DIR} \
+    -pthread -c ${GTEST_DIR}/src/gtest-all.cc
+ar -rv libgtest.a gtest-all.o
+
+# Build test executable
+cd make
+make
+./sample1_unittest
