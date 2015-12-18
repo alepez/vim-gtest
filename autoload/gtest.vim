@@ -63,6 +63,27 @@ function! gtest#ListTestNames(A, L, P)
   " FIXME naive implementation with system and sed. Use vim builtin instead
   return system(g:gtest#gtest_command . " --gtest_filter='" . g:gtest#test_case . ".*' --gtest_list_tests | sed '/^[^ ]/d' | sed 's/^  //'")
 endfunction
+
+fu! s:ListTests()
+  return system(g:gtest#gtest_command . " --gtest_list_tests")
+endf
+
+fu! s:ParseTests(tests)
+  " split to lines, remove the first line
+  let l:lines = split(a:tests, '\n')[1:]
+  let l:result = ""
+  for l:line in l:lines
+    if l:line[0] != ' '
+      " Lines not starting with space are test cases
+      let l:test_case = l:line
+    else
+      " Lines starting with space are tests
+      let l:result .= l:test_case . l:line[2:] . "\n"
+    endif
+  endfor
+
+  return result
+endf
 " }}}
 
 " Public functions {{{
@@ -96,6 +117,11 @@ endfunction
 function! gtest#GTestNext()
   silent normal! /^TEST
 endfunction
+
+" Get the list of all tests, Case1.Test1\nCase1.Test2\nCase2.Test1 etc...
+fu! gtest#GetAllTests()
+  return s:ParseTests(s:ListTests())
+endf
 
 " Select test under cursor
 function! gtest#GTestUnderCursor(try_prev)
