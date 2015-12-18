@@ -1,6 +1,6 @@
 # vim-gtest
 
-**Vim plugin to run *GoogleTest* using https://github.com/benmills/vimux**
+**Vim plugin to run [*GoogleTest*](https://github.com/google/googletest) using https://github.com/benmills/vimux**
 
 <img src="http://files.pezzato.net/github/vim-gtest.gif" />
 
