@@ -42,6 +42,13 @@ function! s:GetFullCommand()
   return "( clear && " . l:cmd . ")"
 endfunction
 
+function! s:GetTestFullUnderCursor()
+  " let l:current_line = getline(".")
+  let l:current_line = 'TEST(AJsonObj, CanBeLoadedByString) {'
+  let l:test_full = substitute(l:current_line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
+  return l:test_full
+endfunction
+
 function! gtest#ListTestCases(A, L, P)
   " FIXME naive implementation with system and sed. Use vim builtin instead
   return system(g:gtest#gtest_command . " --gtest_list_tests | sed '/^ /d' | sed 's/\.$//' | sed '/main\(\)/d'")
@@ -83,5 +90,10 @@ endfunction
 " Find next test in buffer and go to first line in the block
 function! gtest#GTestNext()
   normal! /^TESTj^
+endfunction
+
+" Select text under cursor
+function! gtest#GTestUnderCursor()
+  call s:GetTestFullUnderCursor()
 endfunction
 " }}}
