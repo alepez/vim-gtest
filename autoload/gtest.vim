@@ -53,6 +53,14 @@ function! gtest#GTestCase(test_case)
   let g:gtest#test_case = a:test_case
 endfunction
 
+function! gtest#GTestPrev()
+  normal! 2k?^TESTj^
+endfunction
+
+function! gtest#GTestNext()
+  normal! /^TESTj^
+endfunction
+
 function! gtest#GTestName(test_name)
   let g:gtest#test_name = a:test_name
 endfunction
