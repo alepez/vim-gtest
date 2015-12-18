@@ -5,4 +5,4 @@
 
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 
-"${PROJECT_DIR}/test/googletest/googletest/make/sample1_unittest"
+"${PROJECT_DIR}/test/googletest/googletest/make/sample1_unittest" $@

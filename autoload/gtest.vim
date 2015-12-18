@@ -42,6 +42,14 @@ function! s:GetFullCommand()
   return "( clear && " . l:cmd . ")"
 endfunction
 
+function! s:GetTestCaseFromFull(full)
+  return split(a:full, '\.')[0]
+endfunction
+
+function! s:GetTestNameFromFull(full)
+  return split(a:full, '\.')[1]
+endfunction
+
 function! s:GetTestFullFromLine(line)
   return substitute(a:line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
 endfunction
@@ -79,22 +87,21 @@ function! gtest#GTestName(test_name)
   let g:gtest#test_name = a:test_name
 endfunction
 
-" Find prev test in buffer and go to first line in the block
+" Find prev test in buffer
 function! gtest#GTestPrev()
-  normal! 2k?^TESTj^
+  normal! 2k?^TEST
 endfunction
 
-" Find next test in buffer and go to first line in the block
+" Find next test in buffer
 function! gtest#GTestNext()
-  normal! /^TESTj^
+  normal! /^TEST
 endfunction
 
 " Select text under cursor
 function! gtest#GTestUnderCursor()
-  let l:line = getline(".")
-  call s:GetTestFullFromLine(line)
+  let l:full = s:GetTestFullFromLine(getline("."))
+  call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
+  call gtest#GTestName(s:GetTestNameFromFull(l:full))
 endfunction
 " }}}
 
-
-echom s:GetTestFullFromLine('TEST(FactorialTest, Zero) {')
