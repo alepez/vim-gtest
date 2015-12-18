@@ -89,12 +89,12 @@ endfunction
 
 " Find prev test in buffer
 function! gtest#GTestPrev()
-  normal! ?^TEST
+  silent normal! ?^TEST
 endfunction
 
 " Find next test in buffer
 function! gtest#GTestNext()
-  normal! /^TEST
+  silent normal! /^TEST
 endfunction
 
 " Select test under cursor
