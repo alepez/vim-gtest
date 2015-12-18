@@ -89,7 +89,7 @@ endfunction
 
 " Find prev test in buffer
 function! gtest#GTestPrev()
-  normal! 2k?^TEST
+  normal! ?^TEST
 endfunction
 
 " Find next test in buffer
@@ -104,10 +104,12 @@ function! gtest#GTestUnderCursor(try_prev)
     call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
     call gtest#GTestName(s:GetTestNameFromFull(l:full))
   catch
-    echom "Not a valid test"
     if a:try_prev
+      " Find test line
       call gtest#GTestPrev()
       call gtest#GTestUnderCursor(0)
+      " Go back to position
+      normal! ``
     endif
   endtry
 endfunction
