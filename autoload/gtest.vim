@@ -42,11 +42,8 @@ function! s:GetFullCommand()
   return "( clear && " . l:cmd . ")"
 endfunction
 
-function! s:GetTestFullUnderCursor()
-  " let l:current_line = getline(".")
-  let l:current_line = 'TEST(AJsonObj, CanBeLoadedByString) {'
-  let l:test_full = substitute(l:current_line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
-  return l:test_full
+function! s:GetTestFullFromLine(line)
+  return substitute(a:line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
 endfunction
 
 function! gtest#ListTestCases(A, L, P)
@@ -94,6 +91,10 @@ endfunction
 
 " Select text under cursor
 function! gtest#GTestUnderCursor()
-  call s:GetTestFullUnderCursor()
+  let l:line = getline(".")
+  call s:GetTestFullFromLine(line)
 endfunction
 " }}}
+
+
+echom s:GetTestFullFromLine('TEST(FactorialTest, Zero) {')
