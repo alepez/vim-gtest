@@ -59,7 +59,7 @@ nnoremap <leader>tn :GTestName<space>
 
 If you'd like to help, check out the
 [issues](https://github.com/alepez/vim-gtest/issues). I'd greatly appreciate
-any contribution you make.
+any contribution you make. Beer is also appreciated ☺
 
 ### Testing
 
