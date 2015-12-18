@@ -98,13 +98,17 @@ function! gtest#GTestNext()
 endfunction
 
 " Select text under cursor
-function! gtest#GTestUnderCursor()
+function! gtest#GTestUnderCursor(try_prev)
   let l:full = s:GetTestFullFromLine(getline("."))
   try
     call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
     call gtest#GTestName(s:GetTestNameFromFull(l:full))
   catch
     echom "Not a valid test"
+    if a:try_prev
+      call gtest#GTestPrev()
+      call gtest#GTestUnderCursor(0)
+    endif
   endtry
 endfunction
 " }}}

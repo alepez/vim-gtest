@@ -17,7 +17,7 @@ let g:loaded_gtest = 1
 command! -nargs=0 GTestNext call gtest#GTestNext()
 command! -nargs=0 GTestPrev call gtest#GTestPrev()
 command! -nargs=0 GTestRun call gtest#GTestRun()
-command! -nargs=0 GTestUnderCursor call  gtest#GTestUnderCursor()
+command! -nargs=0 GTestUnderCursor call  gtest#GTestUnderCursor(1)
 command! -nargs=1 -complete=custom,gtest#ListTestCases GTestCase call gtest#GTestCase(<f-args>)
 command! -nargs=1 -complete=custom,gtest#ListTestNames GTestName call gtest#GTestName(<f-args>)
 command! -nargs=1 -complete=file GTestCmd call gtest#GTestCmd(<f-args>)
