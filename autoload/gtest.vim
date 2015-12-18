@@ -100,8 +100,12 @@ endfunction
 " Select text under cursor
 function! gtest#GTestUnderCursor()
   let l:full = s:GetTestFullFromLine(getline("."))
-  call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
-  call gtest#GTestName(s:GetTestNameFromFull(l:full))
+  try
+    call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
+    call gtest#GTestName(s:GetTestNameFromFull(l:full))
+  catch
+    echom "Not a valid test"
+  endtry
 endfunction
 " }}}
 
