@@ -86,8 +86,8 @@ fu! s:ParseTests(tests)
 endf
 
 fu! s:SelectTestByFullName(full)
-  call gtest#GTestCase(s:GetTestCaseFromFull(l:full))
-  call gtest#GTestName(s:GetTestNameFromFull(l:full))
+  call gtest#GTestCase(s:GetTestCaseFromFull(a:full))
+  call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
 " }}}

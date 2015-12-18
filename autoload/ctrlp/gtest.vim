@@ -15,9 +15,9 @@ let g:loaded_ctrlp_gtest = 1
 let s:gtest_var = {
 	\ 'init': 'ctrlp#gtest#init()',
 	\ 'accept': 'ctrlp#gtest#accept',
-	\ 'lname': 'gtest',
-	\ 'sname': 'cmdp',
-	\ 'type': 'tabs',
+	\ 'lname': 'googletest',
+	\ 'sname': 'gtest',
+	\ 'type': 'line',
 	\ 'sort': 0,
 	\ }
 
@@ -53,13 +53,6 @@ func! ctrlp#gtest#accept(mode, str)
   call ctrlp#exit()
   redraw
   call gtest#GTestRunOnly(a:str)
-  " call feedkeys(':GTestSel ', 'n')
-  " call feedkeys(split(a:str, '\t')[0], 'n')
-  " if g:ctrlp_gtest_execute == 1
-  "   call feedkeys("\<CR>", 'n')
-  " endif
-  " call remove(s:gtest_commands, index(s:gtest_commands, a:str))
-  " call insert(s:gtest_commands, a:str)
 endfunc
 
 
