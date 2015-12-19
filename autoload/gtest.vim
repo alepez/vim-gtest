@@ -38,7 +38,6 @@ endfunction
 
 function! s:GetFullCommand()
   let l:cmd = g:gtest#gtest_command . " " . s:GetArguments()
-  echom l:cmd
   return "( clear && " . l:cmd . ")"
 endfunction
 
@@ -65,6 +64,7 @@ function! gtest#ListTestNames(A, L, P)
 endfunction
 
 fu! s:ListTests()
+  echom g:gtest#gtest_command . " --gtest_list_tests"
   return system(g:gtest#gtest_command . " --gtest_list_tests")
 endf
 

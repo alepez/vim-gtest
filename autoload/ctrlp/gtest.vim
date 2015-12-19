@@ -15,7 +15,7 @@ let g:loaded_ctrlp_gtest = 1
 let s:gtest_var = {
 	\ 'init': 'ctrlp#gtest#init()',
 	\ 'accept': 'ctrlp#gtest#accept',
-	\ 'lname': 'googletest',
+	\ 'lname': 'gtest',
 	\ 'sname': 'gtest',
 	\ 'type': 'line',
 	\ 'sort': 0,
