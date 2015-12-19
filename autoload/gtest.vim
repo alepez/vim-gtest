@@ -25,7 +25,7 @@ endif
 
 " Private functions {{{
 function! s:GetMiscArguments()
-  return "--gtest_print_time=0"
+  return "--gtest_print_time=0 --gtest_stream_result_to=localhost:2705"
 endfunction
 
 function! s:GetFilters()
