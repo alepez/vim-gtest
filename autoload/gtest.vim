@@ -21,11 +21,24 @@ endif
 if !exists('g:gtest#gtest_command')
   let g:gtest#gtest_command = "./test"
 endif
+
+" Needed for failing test highlight
+if !exists('g:gtest#stream_result')
+  let g:gtest#stream_result = 0
+endif
 " }}}
 
 " Private functions {{{
 function! s:GetMiscArguments()
-  return "--gtest_print_time=0 --gtest_stream_result_to=localhost:2705"
+  let l:args = ""
+
+  if g:gtest#stream_result
+    let l:args = l:args . " --gtest_stream_result_to=localhost:2705"
+  endif
+
+  let l:args = l:args . " --gtest_print_time=0"
+
+  return l:args
 endfunction
 
 function! s:GetFilters()
