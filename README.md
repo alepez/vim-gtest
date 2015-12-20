@@ -51,6 +51,16 @@ It's a fantastic fuzzy finder for vim! Try it immediately!
 `vim-gtest` extends *ctrlp.vim* with a google test finder. Now you can find
 and launch tests at the speed of light!
 
+### QuickFix
+
+You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
+
+```
+:let g:gtest#highlight_failing_tests = 1
+:GTestRun
+:GTestHighlight
+```
+
 ## Shortcuts
 
 You can map these commands to your favorite shortcuts:

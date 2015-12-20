@@ -2,7 +2,7 @@ fu! CreateRandomFile()
   return system('mktemp')[:-2]
 endf
 
-fu! s:StartListening()
+fu! gtest#highlight#StartListening()
   let g:gtest#stream_result = 1
   let s:results_file = CreateRandomFile()
   let l:cmd = "nc -l -p 2705 > " . s:results_file
@@ -10,7 +10,7 @@ fu! s:StartListening()
 endf
 
 fu! s:StopListening()
-  " call system("rm " . s:results_file)
+  call system("rm " . s:results_file)
   let g:gtest#stream_result = 0
 endf
 
@@ -36,13 +36,18 @@ endf
 
 fu! s:ToQuickFixItem(event)
   let l:result = {}
-  let l:result['filename'] = a:event['file']
+  let l:result['filename'] = s:ResolvePath(a:event['file'])
   let l:result['lnum'] = a:event['line']
   let l:result['text'] = a:event['message']
   return l:result
 endf
 
 fu! gtest#highlight#HighlightFailingTests()
+  if !(exists('s:results_file'))
+    echom "No test results available"
+    return
+  endif
+
   let l:qflist = []
   let l:lines = s:ReadLog()
   for l:line in l:lines
@@ -57,7 +62,6 @@ fu! gtest#highlight#HighlightFailingTests()
   if (len(l:qflist) > 0)
     copen
   endif
-endf
 
-call s:StartListening()
-call gtest#GTestRun()
+  call s:StopListening()
+endf

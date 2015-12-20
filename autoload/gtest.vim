@@ -23,8 +23,8 @@ if !exists('g:gtest#gtest_command')
 endif
 
 " Needed for failing test highlight
-if !exists('g:gtest#stream_result')
-  let g:gtest#stream_result = 0
+if !exists('g:gtest#highlight_failing_tests')
+  let g:gtest#highlight_failing_tests = 0
 endif
 " }}}
 
@@ -32,7 +32,7 @@ endif
 function! s:GetMiscArguments()
   let l:args = ""
 
-  if g:gtest#stream_result
+  if g:gtest#highlight_failing_tests
     let l:args = l:args . " --gtest_stream_result_to=localhost:2705"
   endif
 
@@ -150,6 +150,10 @@ endf
 
 " Run selected executable with filters, inside a tmux pane
 function! gtest#GTestRun()
+  if g:gtest#highlight_failing_tests
+    call gtest#highlight#StartListening()
+  endif
+
   call VimuxRunCommand(s:GetFullCommand())
 endfunction
 
