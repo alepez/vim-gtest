@@ -35,8 +35,8 @@ fu! s:ResolvePath(rel_path)
 endf
 
 fu! s:ShowProblem(event)
-  " echom s:ResolvePath(a:event['file'])
-  " echom a:event['line']
+  echom s:ResolvePath(a:event['file'])
+  echom a:event['line']
   echom a:event['message']
 endf
 
