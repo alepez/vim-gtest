@@ -34,19 +34,29 @@ fu! s:ResolvePath(rel_path)
   return l:file
 endf
 
-fu! s:ShowProblem(event)
-  echom s:ResolvePath(a:event['file'])
-  echom a:event['line']
-  echom a:event['message']
+fu! s:ToQuickFixItem(event)
+  let l:result = {}
+  let l:result['filename'] = a:event['file']
+  let l:result['lnum'] = a:event['line']
+  let l:result['text'] = a:event['message']
+  return l:result
 endf
 
 fu! gtest#highlight#HighlightFailingTests()
+  let l:qflist = []
   let l:lines = s:ReadLog()
   for l:line in l:lines
     if match(l:line, "^event=TestPartResult") != -1
-      call s:ShowProblem(s:ParseEvent(l:line))
+      let l:event = s:ParseEvent(l:line)
+      call add(l:qflist, s:ToQuickFixItem(event))
     endif
   endfor
+
+  call setqflist(l:qflist)
+
+  if (len(l:qflist) > 0)
+    copen
+  endif
 endf
 
 call s:StartListening()
