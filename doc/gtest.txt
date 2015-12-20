@@ -5,8 +5,74 @@ License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
 
-INTRODUCTION                                               *gtest_introduction*
+INTRODUCTION                                       *gtest* *gtest-introduction*
 
+Google Test is a unit testing library for the C++ programming language.
 
+With vim-gtest you can:
+
+ - jump between tests in the open buffer
+ - launch test under the cursor
+ - select a test case, with autocompletion
+ - select a test name, with autocompletion
+ - launch selected tests
+ - highlight failing tests in the quickfix
+ - search and select tests with *ctrlp*
+
+OPTIONS                                                         *gtest-options*
+
+                                                        *g:gtest#gtest_command*
+Set the executable which will be run:
+>
+  let g:gtest#gtest_command = "./test"
+<
+
+                                              *g:gtest#highlight_failing_tests*
+Set this to 1 if you want enable failing tests highlight.
+>
+  let g:gtest#highlight_failing_tests = 0
+<
+
+COMMANDS *gtest-commands*
+
+You can set |g:gtest#highlight_failing_tests| with this command:
+>
+  :GTestCmd path/to/test/executable
+<
+You can select test cases and test name, with autocompletion:
+>
+  :GTestCase MyTestCase
+  :GTestName MyTestName
+<
+Call GTestRun to run selected tests immediately:
+>
+  :GTestRun
+<
+Jump to previous/next test in the current buffer:
+>
+  :GTestPrev
+  :GTestNext
+<
+When the cursor is over the source code of a test, you can run that test:
+>
+  :GTestRunUnderCursor
+<
+
+CTRLP                                                             *gtest-ctrlp*
+
+Don't you know what ctrlp is?
+
+It's a fantastic fuzzy finder for vim! Try it immediately! https://github.com/ctrlpvim/ctrlp.vim
+
+This plugin extends *ctrlp.vim* with a google test finder. Now you can find
+and launch tests at the speed of light!
+
+QUICKFIX                                                       *gtest-quickfix*
+
+You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
+This works only if |g:gtest#highlight_failing_tests| is set to 1.
+>
+  :GTestRun
+  :GTestHighlight
 
  vim:tw=78:ts=8:ft=help:norl:
