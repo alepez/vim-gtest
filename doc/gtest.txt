@@ -1,7 +1,7 @@
 *gtest.txt*  Run gtest inside vim
 
 Author:  Alessandro Pezzato <http://pezzato.net/>
-License: Same terms as Vim itself (see |license|)
+License: The MIT License (MIT)
 
 This plugin is only available if 'compatible' is not set.
 
