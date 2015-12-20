@@ -18,7 +18,7 @@ fu! s:ReadLog()
   return readfile(s:results_file)
 endf
 
-fu! ParseEvent(event_str)
+fu! s:ParseEvent(event_str)
   let l:result = {}
   let l:tokens = split(a:event_str, '&')
   for l:token in l:tokens
@@ -28,12 +28,23 @@ fu! ParseEvent(event_str)
   return result
 endf
 
+fu! s:ResolvePath(rel_path)
+  let l:dir = fnamemodify(g:gtest#gtest_command, ':h')
+  let l:file = resolve(l:dir . "/" . a:rel_path)
+  return l:file
+endf
+
+fu! s:ShowProblem(event)
+  " echom s:ResolvePath(a:event['file'])
+  " echom a:event['line']
+  echom a:event['message']
+endf
+
 fu! gtest#highlight#HighlightFailingTests()
   let l:lines = s:ReadLog()
   for l:line in l:lines
     if match(l:line, "^event=TestPartResult") != -1
-      let l:event = ParseEvent(l:line)
-      echom l:event["event"]
+      call s:ShowProblem(s:ParseEvent(l:line))
     endif
   endfor
 endf
