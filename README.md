@@ -2,7 +2,7 @@
 
 **Vim plugin to run [*GoogleTest*](https://github.com/google/googletest) using https://github.com/benmills/vimux**
 
-<img src="http://pezzato.net/2015/12/20/vim-gtest.gif" />
+<p align="center"><img src="http://pezzato.net/2015/12/20/vim-gtest.gif" /></p>
 
 ## Usage
 
