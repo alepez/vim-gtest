@@ -53,19 +53,58 @@ function! s:GetTestFullFromLine(line)
   return substitute(a:line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
 endfunction
 
-function! gtest#ListTestCases(A, L, P)
-  " FIXME naive implementation with system and sed. Use vim builtin instead
-  return system(g:gtest#gtest_command . " --gtest_list_tests | sed '/^ /d' | sed 's/\.$//' | sed '/main\(\)/d'")
+function! gtest#ListTestCases(arg, line, pos)
+  let l:all = s:ParseTestCases(s:ListTests())
+  return join(l:all, "\n")
 endfunction
 
-function! gtest#ListTestNames(A, L, P)
-  " FIXME naive implementation with system and sed. Use vim builtin instead
-  return system(g:gtest#gtest_command . " --gtest_filter='" . g:gtest#test_case . ".*' --gtest_list_tests | sed '/^[^ ]/d' | sed 's/^  //'")
+function! gtest#ListTestNames(arg, line, pos)
+  let l:all = s:ParseTestNames(s:ListTests())
+  return join(l:all, "\n")
 endfunction
 
 fu! s:ListTests()
-  echom g:gtest#gtest_command . " --gtest_list_tests"
   return system(g:gtest#gtest_command . " --gtest_list_tests")
+endf
+
+fu! s:ParseTestCases(tests)
+  " split to lines, remove the first line
+  let l:lines = split(a:tests, '\n')[1:]
+  " Result is a list
+  let l:result = []
+  " Add special * case
+  call add(l:result, "*")
+  for l:line in l:lines
+    if l:line[0] != ' '
+      call add(l:result, l:line[:-2])
+    endif
+  endfor
+  return result
+endf
+
+fu! s:ParseTestNames(tests)
+  " split to lines, remove the first line
+  let l:lines = split(a:tests, '\n')[1:]
+  " Result is a list
+  let l:result = []
+  " Add special * test
+  call add(l:result, "*")
+  " Needed to filter by test case
+  let l:test_case = ""
+
+  for l:line in l:lines
+    if l:line[0] != ' '
+      " Lines not starting with space are test cases, set current case
+      let l:test_case = l:line[:-2]
+    else
+      " Lines starting with space are tests
+      if l:test_case == g:gtest#test_case
+        call add(l:result, l:line[2:])
+      endif
+    endif
+  endfor
+
+  return result
 endf
 
 fu! s:ParseTests(tests)
@@ -160,3 +199,4 @@ function! gtest#GTestRunUnderCursor()
 endfunction
 " }}}
 
+" vim:foldmethod=marker:foldlevel=1
