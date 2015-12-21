@@ -179,23 +179,37 @@ function! gtest#GTestNext()
   silent normal! /^TEST
 endfunction
 
+fu! s:LineIsTestHeader(line)
+  return 0 == match(a:line, "^TEST")
+endf
+
 " Get the list of all tests, [ 'Case1.Test1', 'Case1.Test2', 'Case2.Test1' ...]
 fu! gtest#GetAllTests()
   return s:ParseTests(s:ListTests())
 endf
 
+fu! s:FindCloserTest()
+  " Find test line
+  call gtest#GTestPrev()
+  call gtest#GTestUnderCursor(0)
+  " Go back to position
+  normal! ``
+endf
+
 " Select test under cursor
 function! gtest#GTestUnderCursor(try_prev)
   let l:full = s:GetTestFullFromLine(getline("."))
+
   try
+
+    if !(s:LineIsTestHeader(l:full))
+      throw "This line is not a test"
+    endif
+
     call s:SelectTestByFullName(l:full)
   catch
     if a:try_prev
-      " Find test line
-      call gtest#GTestPrev()
-      call gtest#GTestUnderCursor(0)
-      " Go back to position
-      normal! ``
+      call s:FindCloserTest()
     endif
   endtry
 endfunction
