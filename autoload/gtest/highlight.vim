@@ -1,3 +1,8 @@
+" ============================================================================
+" Maintainer:  Alessandro Pezzato <http://pezzato.net/>
+" License:     The MIT License (MIT)
+" ============================================================================
+
 fu! CreateRandomFile()
   return system('mktemp')[:-2]
 endf
