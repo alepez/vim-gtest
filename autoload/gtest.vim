@@ -188,28 +188,24 @@ fu! gtest#GetAllTests()
   return s:ParseTests(s:ListTests())
 endf
 
-fu! s:FindCloserTest()
-  " Find test line
-  call gtest#GTestPrev()
-  call gtest#GTestUnderCursor(0)
-  " Go back to position
-  normal! ``
-endf
-
 " Select test under cursor
 function! gtest#GTestUnderCursor(try_prev)
-  let l:full = s:GetTestFullFromLine(getline("."))
-
   try
+    let l:line = getline(".")
 
-    if !(s:LineIsTestHeader(l:full))
+    if !(s:LineIsTestHeader(l:line))
       throw "This line is not a test"
     endif
 
+    let l:full = s:GetTestFullFromLine(l:line)
     call s:SelectTestByFullName(l:full)
   catch
     if a:try_prev
-      call s:FindCloserTest()
+      " Find test line
+      call gtest#GTestPrev()
+      call gtest#GTestUnderCursor(0)
+      " Go back to position
+      normal! ``
     endif
   endtry
 endfunction
