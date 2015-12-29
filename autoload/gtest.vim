@@ -144,6 +144,21 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
+fu! s:RunWithDispatch(cmd)
+  " remember current makeprg and errorformat
+  let l:makeprg=&makeprg
+  let l:efm=&errorformat
+  " temporary set makeprg
+  let &makeprg=a:cmd
+  " this is how gtest outputs errors
+  set errorformat=%f:%l:\ %m
+  " call Make (vim-dispatch)
+  silent execute 'Make'
+  " restore previous makeprg and errorformat
+  let &makeprg=l:makeprg
+  let &errorformat=l:efm
+endf
+
 " }}}
 
 " Public functions {{{
@@ -154,7 +169,16 @@ function! gtest#GTestRun()
     call gtest#highlight#StartListening()
   endif
 
-  call VimuxRunCommand(s:GetFullCommand())
+  let l:cmd = s:GetFullCommand()
+
+  if exists(':Make')
+    call s:RunWithDispatch(l:cmd)
+  elseif exists('VimuxRunCommand')
+    call VimuxRunCommand(l:cmd)
+  else
+    execute '!' . l:cmd
+  endif
+
 endfunction
 
 " Set test executable
