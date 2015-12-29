@@ -144,7 +144,7 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
-fu! s:RunWithDispatch(cmd)
+fu! s:RunWithMake(cmd)
   " remember current makeprg and errorformat
   let l:makeprg=&makeprg
   let l:efm=&errorformat
@@ -171,8 +171,12 @@ function! gtest#GTestRun()
 
   let l:cmd = s:GetFullCommand()
 
-  if exists(':Make')
-    call s:RunWithDispatch(l:cmd)
+  if exists(':Dispatch')
+    if g:gtest#highlight_failing_tests
+      call s:RunWithMake(l:cmd)
+    else
+      silent execute 'Dispatch ' . l:cmd
+    endif
   elseif exists('VimuxRunCommand')
     call VimuxRunCommand(l:cmd)
   else

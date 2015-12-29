@@ -61,6 +61,9 @@ You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
 :GTestHighlight
 ```
 
+If you have [vim-dispatch](https://github.com/tpope/vim-dispatch) installed,
+calling `:GTestHighlight` isn't needed.
+
 ## Shortcuts
 
 You can map these commands to your favorite shortcuts:
