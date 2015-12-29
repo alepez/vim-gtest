@@ -144,6 +144,21 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
+fu! s:RunWithMake(cmd)
+  " remember current makeprg and errorformat
+  let l:makeprg=&makeprg
+  let l:efm=&errorformat
+  " temporary set makeprg
+  let &makeprg=a:cmd
+  " this is how gtest outputs errors
+  set errorformat=%f:%l:\ %m
+  " call Make (vim-dispatch)
+  silent execute 'Make'
+  " restore previous makeprg and errorformat
+  let &makeprg=l:makeprg
+  let &errorformat=l:efm
+endf
+
 " }}}
 
 " Public functions {{{
@@ -154,7 +169,25 @@ function! gtest#GTestRun()
     call gtest#highlight#StartListening()
   endif
 
-  call VimuxRunCommand(s:GetFullCommand())
+  let l:cmd = s:GetFullCommand()
+
+  " Check if vim-dispatch is installed
+  if exists(':Dispatch')
+    if g:gtest#highlight_failing_tests
+      " Use Make if user want to highlight failing tests
+      call s:RunWithMake(l:cmd)
+    else
+      " Use Dispatch otherwise
+      silent execute 'Dispatch ' . l:cmd
+    endif
+  elseif exists('VimuxRunCommand')
+    " Fallback to VimuxRunCommand if Dispatch isn't available
+    call VimuxRunCommand(l:cmd)
+  else
+    " Fallback to syncronous system command
+    execute '!' . l:cmd
+  endif
+
 endfunction
 
 " Set test executable
