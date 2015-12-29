@@ -1,3 +1,11 @@
+" ============================================================================
+" Maintainer:  Alessandro Pezzato <http://pezzato.net/>
+" License:     The MIT License (MIT)
+" ============================================================================
+
+" Thanks to the creator of https://github.com/fisadev/vim-ctrlp-cmdpalette,
+" which allowed me to learn how to extend CtrlP.
+
 let g:loaded_ctrlp_gtest = 1
 
 " The main variable for this extension.
@@ -20,10 +28,6 @@ let s:gtest_var = {
 	\ 'type': 'line',
 	\ 'sort': 0,
 	\ }
-
-
-" Pre-load the vim commands list
-let s:gtest_commands = []
 
 if !exists('g:ctrlp_gtest_execute')
   let g:ctrlp_gtest_execute = 0

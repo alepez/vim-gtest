@@ -98,3 +98,8 @@ Now from `vim`, just call from command line `:GTestCmd ./test/launch`.
 
 After editing this plugin, just `:source %` and try something. Samples unit
 tests can be found in `test/googletest/googletest/samples` directory.
+
+## Thanks
+
+Special thanks to the creator of https://github.com/fisadev/vim-ctrlp-cmdpalette,
+which allowed me to learn how to extend CtrlP.

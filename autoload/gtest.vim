@@ -1,9 +1,6 @@
 " ============================================================================
-" File:        gtest.vim
-" Description: Run google test inside vim
 " Maintainer:  Alessandro Pezzato <http://pezzato.net/>
 " License:     The MIT License (MIT)
-" Version:     0.1.2
 " ============================================================================
 
 " Options {{{
@@ -215,6 +212,10 @@ function! gtest#GTestNext()
   silent normal! /^TEST
 endfunction
 
+fu! s:LineIsTestHeader(line)
+  return 0 == match(a:line, "^TEST")
+endf
+
 " Get the list of all tests, [ 'Case1.Test1', 'Case1.Test2', 'Case2.Test1' ...]
 fu! gtest#GetAllTests()
   return s:ParseTests(s:ListTests())
@@ -222,8 +223,14 @@ endf
 
 " Select test under cursor
 function! gtest#GTestUnderCursor(try_prev)
-  let l:full = s:GetTestFullFromLine(getline("."))
   try
+    let l:line = getline(".")
+
+    if !(s:LineIsTestHeader(l:line))
+      throw "This line is not a test"
+    endif
+
+    let l:full = s:GetTestFullFromLine(l:line)
     call s:SelectTestByFullName(l:full)
   catch
     if a:try_prev
