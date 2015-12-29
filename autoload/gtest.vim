@@ -171,15 +171,20 @@ function! gtest#GTestRun()
 
   let l:cmd = s:GetFullCommand()
 
+  " Check if vim-dispatch is installed
   if exists(':Dispatch')
     if g:gtest#highlight_failing_tests
+      " Use Make if user want to highlight failing tests
       call s:RunWithMake(l:cmd)
     else
+      " Use Dispatch otherwise
       silent execute 'Dispatch ' . l:cmd
     endif
   elseif exists('VimuxRunCommand')
+    " Fallback to VimuxRunCommand if Dispatch isn't available
     call VimuxRunCommand(l:cmd)
   else
+    " Fallback to syncronous system command
     execute '!' . l:cmd
   endif
 
