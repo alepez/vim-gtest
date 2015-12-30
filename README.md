@@ -1,6 +1,7 @@
 # vim-gtest
 
-**Vim plugin to run [*GoogleTest*](https://github.com/google/googletest) using https://github.com/benmills/vimux**
+**Vim plugin to quickly select and run
+[*GoogleTest*](https://github.com/google/googletest) asyncronously.**
 
 <p align="center"><img src="http://pezzato.net/2015/12/20/vim-gtest.gif" /></p>
 
@@ -101,5 +102,11 @@ tests can be found in `test/googletest/googletest/samples` directory.
 
 ## Thanks
 
-Special thanks to the creator of https://github.com/fisadev/vim-ctrlp-cmdpalette,
+Thanks to the creator of https://github.com/ctrlpvim/ctrlp.vim
+
+Thanks to the creator of https://github.com/fisadev/vim-ctrlp-cmdpalette,
 which allowed me to learn how to extend CtrlP.
+
+Special thanks to [Tim Pope](https://github.com/tpope), the author of
+[vim-dispatch](https://github.com/tpope/vim-dispatch) and many other useful
+plugins.
