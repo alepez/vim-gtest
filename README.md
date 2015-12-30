@@ -110,3 +110,13 @@ which allowed me to learn how to extend CtrlP.
 Special thanks to [Tim Pope](https://github.com/tpope), the author of
 [vim-dispatch](https://github.com/tpope/vim-dispatch) and many other useful
 plugins.
+
+## Self-Promotion
+
+Like vim-gtest?  Follow the repository on
+[GitHub](https://github.com/alepez/vim-gtest) and vote for it on
+[vim.org](http://www.vim.org/scripts/script.php?script_id=5292). And if you're
+feeling especially charitable, follow [Alessandro Pezzato](http://pezzato.net/)
+on [Twitter](http://twitter.com/alepezzato) and
+[GitHub](https://github.com/alepez).
+
