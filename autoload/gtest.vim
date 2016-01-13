@@ -216,6 +216,10 @@ function! gtest#GTestNext()
   silent normal! /^TEST
 endfunction
 
+fu! s:LineIsTestEnabled(line)
+  return -1 == match(a:line, "DISABLED_")
+endf
+
 fu! s:LineIsTestHeader(line)
   return 0 == match(a:line, "^TEST")
 endf
@@ -258,6 +262,24 @@ function! gtest#GTestRunUnderCursor()
   call gtest#GTestUnderCursor(1)
   call gtest#GTestRun()
 endfunction
+
+fu! gtest#GTestToggleEnabled()
+  let l:line = getline(".")
+  let l:position_changed = 0
+  if !(s:LineIsTestHeader(l:line))
+    let l:position_changed = 1
+    call gtest#GTestPrev()
+    let l:line = getline(".")
+  endif
+  if s:LineIsTestEnabled(l:line)
+    silent normal! 0f aDISABLED_
+  else
+    silent normal! 0/DISABLED_df_
+  endif
+  if l:position_changed
+    normal! ``
+  endif
+endf
 " }}}
 
 " vim:foldmethod=marker:foldlevel=1

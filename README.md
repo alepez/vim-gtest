@@ -37,6 +37,15 @@ Go to the prev/next test in the current buffer.
 :GTestNext
 ```
 
+### Enable/Disable tests under cursor
+
+This remove/add `DISABLED_` prefix to test name.
+
+```
+:GTestToggleEnabled
+```
+
+
 ### Run test under cursor
 
 ```
@@ -74,6 +83,7 @@ nnoremap <leader>tt :GTestRun<CR>
 nnoremap <leader>tu :GTestRunUnderCursor<CR>
 nnoremap <leader>tc :GTestCase<space>
 nnoremap <leader>tn :GTestName<space>
+nnoremap <leader>te :GTestToggleEnabled<CR>
 ```
 
 ## Development
