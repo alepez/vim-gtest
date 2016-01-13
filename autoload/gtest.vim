@@ -29,7 +29,7 @@ endif
 function! s:GetMiscArguments()
   let l:args = ""
 
-  if g:gtest#highlight_failing_tests
+  if g:gtest#highlight_failing_tests && !exists(':Dispatch')
     let l:args = l:args . " --gtest_stream_result_to=localhost:2705"
   endif
 
@@ -162,10 +162,6 @@ endf
 
 " Run selected executable with filters, inside a tmux pane
 function! gtest#GTestRun()
-  if g:gtest#highlight_failing_tests
-    call gtest#highlight#StartListening()
-  endif
-
   let l:cmd = s:GetFullCommand()
 
   " Check if vim-dispatch is installed
@@ -178,9 +174,17 @@ function! gtest#GTestRun()
       silent execute 'Dispatch ' . l:cmd
     endif
   elseif exists('VimuxRunCommand')
+    if g:gtest#highlight_failing_tests
+      call gtest#highlight#StartListening()
+    endif
+
     " Fallback to VimuxRunCommand if Dispatch isn't available
     call VimuxRunCommand(l:cmd)
   else
+    if g:gtest#highlight_failing_tests
+      call gtest#highlight#StartListening()
+    endif
+
     " Fallback to syncronous system command
     execute '!' . l:cmd
   endif
