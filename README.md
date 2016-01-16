@@ -74,6 +74,20 @@ You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
 If you have [vim-dispatch](https://github.com/tpope/vim-dispatch) installed,
 calling `:GTestHighlight` isn't needed.
 
+### Switch files
+
+You can switch from implementation to header to test:
+
+```
+:GTestJump
+```
+
+Filenames must follow this rule:
+
+ - implementation: `src/**/*.cpp`
+ - header: `src/**/*.hpp`
+ - test: `test/**/*_test.cpp`
+
 ## Shortcuts
 
 You can map these commands to your favorite shortcuts:
