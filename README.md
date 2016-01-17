@@ -90,14 +90,23 @@ Filenames must follow this rule:
 
 ## Shortcuts
 
-You can map these commands to your favorite shortcuts:
+You can map these commands to your favorite shortcuts. These are mine:
 
 ```
-nnoremap <leader>tt :GTestRun<CR>
-nnoremap <leader>tu :GTestRunUnderCursor<CR>
-nnoremap <leader>tc :GTestCase<space>
-nnoremap <leader>tn :GTestName<space>
-nnoremap <leader>te :GTestToggleEnabled<CR>
+nnoremap <silent> <leader>tt :GTestRun<CR>
+nnoremap <silent> <leader>tu :GTestRunUnderCursor<CR>
+
+nnoremap          <leader>te :GTestToggleEnabled<CR>
+
+nnoremap          <leader>tc :GTestCase<space>
+nnoremap          <leader>tn :GTestName<space>
+
+nnoremap <silent> <leader>tf :CtrlPGTest<CR>
+
+nnoremap <silent> <leader>tj :GTestJump<CR>
+
+nnoremap <silent> ]T :GTestNext<CR>
+nnoremap <silent> [T :GTestPrev<CR>
 ```
 
 ## Development
