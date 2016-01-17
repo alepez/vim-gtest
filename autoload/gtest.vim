@@ -226,7 +226,7 @@ endf
 
 " Get the list of all tests, [ 'Case1.Test1', 'Case1.Test2', 'Case2.Test1' ...]
 fu! gtest#GetAllTests()
-  return s:ParseTests(s:ListTests())
+  return ["*.*"] + s:ParseTests(s:ListTests())
 endf
 
 " Select test under cursor
