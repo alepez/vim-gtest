@@ -5,7 +5,7 @@
 
 fu! s:GetBasename(path)
   let l:res = fnamemodify(a:path, ':r')
-  let l:res = substitute(l:res, "^.*/", "", "")
+  let l:res = substitute(l:res, "^\[^/\]*/", "", "")
   return substitute(l:res, "_test$", "", "")
 endf
 
