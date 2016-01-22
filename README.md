@@ -13,9 +13,17 @@
 :GTestCmd path/to/test/executable
 ```
 
+Or add this line to your `.vimrc`:
+
+```
+let g:gtest#gtest_command = "path/to/test/executable"
+```
+
+Default is: ./test
+
 ### Select tests by name
 
-You can select test cases and test name, with autocompletion.
+You can select test case and test name, with autocompletion.
 
 ```
 :GTestCase MyTestCase
@@ -60,6 +68,8 @@ It's a fantastic fuzzy finder for vim! Try it immediately!
 
 `vim-gtest` extends *ctrlp.vim* with a google test finder. Now you can find
 and launch tests at the speed of light!
+
+**Attention:** [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) must be installed.
 
 ### QuickFix
 
@@ -120,7 +130,7 @@ any contribution you make. Beer is also appreciated ☺
 ### Testing
 
 To test this plugin you need to test it with a testable project. `googletest`
-can test itself. Yeah, like a ship-shipping ship shipping shipping ships.
+can test itself. Testception ☺.
 
 This will download and compile google test and its unit tests:
 
