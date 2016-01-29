@@ -3,7 +3,7 @@
 **Vim plugin to quickly select and run
 [*GoogleTest*](https://github.com/google/googletest) asyncronously.**
 
-<p align="center"><img src="http://pezzato.net/2015/12/20/vim-gtest.gif" /></p>
+[![asciicast](https://asciinema.org/a/8b6692o60nhtys41jpqpgvopi.png)](https://asciinema.org/a/8b6692o60nhtys41jpqpgvopi)
 
 ## Usage
 
