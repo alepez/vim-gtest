@@ -103,20 +103,17 @@ Filenames must follow this rule:
 You can map these commands to your favorite shortcuts. These are mine:
 
 ```
-nnoremap <silent> <leader>tt :GTestRun<CR>
-nnoremap <silent> <leader>tu :GTestRunUnderCursor<CR>
-
-nnoremap          <leader>te :GTestToggleEnabled<CR>
-
-nnoremap          <leader>tc :GTestCase<space>
-nnoremap          <leader>tn :GTestName<space>
-
-nnoremap <silent> <leader>tf :CtrlPGTest<CR>
-
-nnoremap <silent> <leader>tj :GTestJump<CR>
-
-nnoremap <silent> ]T :GTestNext<CR>
-nnoremap <silent> [T :GTestPrev<CR>
+augroup GTest
+	autocmd FileType cpp nnoremap <silent> <leader>tt :GTestRun<CR>
+	autocmd FileType cpp nnoremap <silent> <leader>tu :GTestRunUnderCursor<CR>
+	autocmd FileType cpp nnoremap          <leader>tc :GTestCase<space>
+	autocmd FileType cpp nnoremap          <leader>tn :GTestName<space>
+	autocmd FileType cpp nnoremap <silent> <leader>te :GTestToggleEnabled<CR>
+	autocmd FileType cpp nnoremap <silent> ]T         :GTestNext<CR>
+	autocmd FileType cpp nnoremap <silent> [T         :GTestPrev<CR>
+	autocmd FileType cpp nnoremap <silent> <leader>tf :CtrlPGTest<CR>
+	autocmd FileType cpp nnoremap <silent> <leader>tj :GTestJump<CR>
+augroup END
 ```
 
 ## Development
