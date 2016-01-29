@@ -124,6 +124,10 @@ If you'd like to help, check out the
 [issues](https://github.com/alepez/vim-gtest/issues). I'd greatly appreciate
 any contribution you make. Beer is also appreciated ☺
 
+If you have a question, a feature request, or a new idea, don't hesitate to
+post new issues or pull requests. Collaboration is the most awesome thing in
+the open source community!
+
 ### Testing
 
 To test this plugin you need to test it with a testable project. `googletest`
@@ -160,3 +164,8 @@ feeling especially charitable, follow [Alessandro Pezzato](http://pezzato.net/)
 on [Twitter](http://twitter.com/alepezzato) and
 [GitHub](https://github.com/alepez).
 
+If you like the plugin please don't forget to leave a :star: for this project!
+This will help me to estimate the plugin popularity and plan further
+development.
+
+If you have already starred this repo, thank you!
