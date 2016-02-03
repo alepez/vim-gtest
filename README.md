@@ -53,6 +53,20 @@ This remove/add `DISABLED_` prefix to test name.
 :GTestToggleEnabled
 ```
 
+### Insert a new test
+
+This insert a new test under cursor.
+
+```
+:GTestNewTest
+```
+
+This text will be inserted, with cursor placed on ✎:
+
+```
+TEST_F(PreviousFixture, ✎) {
+}
+```
 
 ### Run test under cursor
 
