@@ -68,6 +68,15 @@ TEST_F(PreviousFixture, ✎) {
 }
 ```
 
+`PreviousFixture` is the name of the first fixture found backward in the source
+code. A fixture is something like this:
+
+```
+struct MyTest : public testing::Test {
+  ...
+}
+```
+
 ### Run test under cursor
 
 ```
