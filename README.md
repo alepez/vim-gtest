@@ -113,6 +113,7 @@ augroup GTest
 	autocmd FileType cpp nnoremap <silent> [T         :GTestPrev<CR>
 	autocmd FileType cpp nnoremap <silent> <leader>tf :CtrlPGTest<CR>
 	autocmd FileType cpp nnoremap <silent> <leader>tj :GTestJump<CR>
+	autocmd FileType cpp nnoremap          <leader>ti :GTestNewTest<CR>
 augroup END
 ```
 
