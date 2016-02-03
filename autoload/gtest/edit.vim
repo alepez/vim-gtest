@@ -13,5 +13,5 @@ fu! g:gtest#edit#InsertNewTest()
   let l:fixture = s:GetPrevFixtureName()
   let l:new_test = 'TEST_F(' . l:fixture . ', __TESTNAME__){}'
   exe ':normal i' . l:new_test
-  silent normal! ?__TESTNAME__cw
+  silent normal! ?__TESTNAME__dw
 endf
