@@ -141,7 +141,7 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
-fu! s:RunWithMake(cmd)
+fu! s:RunWithMake(wrapper, cmd)
   " remember current makeprg and errorformat
   let l:makeprg=&makeprg
   let l:efm=&errorformat
@@ -150,7 +150,7 @@ fu! s:RunWithMake(cmd)
   " this is how gtest outputs errors
   set errorformat=%f:%l:\ %m
   " call Make (vim-dispatch)
-  silent execute 'Make'
+  silent execute a:wrapper
   " restore previous makeprg and errorformat
   let &makeprg=l:makeprg
   let &errorformat=l:efm
@@ -164,15 +164,19 @@ endf
 function! gtest#GTestRun()
   let l:cmd = s:GetFullCommand()
 
+  " Check if neomake is installed
+  if exists(':Neomake')
+    call s:RunWithMake('Neomake!', l:cmd)
   " Check if vim-dispatch is installed
-  if exists(':Dispatch')
+  elseif exists(':Dispatch')
     if g:gtest#highlight_failing_tests
       " Use Make if user want to highlight failing tests
-      call s:RunWithMake(l:cmd)
+      call s:RunWithMake('Make', l:cmd)
     else
       " Use Dispatch otherwise
       silent execute 'Dispatch ' . l:cmd
     endif
+  " Try with VimuxRunCommand
   elseif exists('VimuxRunCommand')
     if g:gtest#highlight_failing_tests
       call gtest#highlight#StartListening()
