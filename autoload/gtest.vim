@@ -141,19 +141,38 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
-fu! s:RunWithMake(wrapper, cmd)
+fu! s:RunWithMake(wrapper, cmd, highlight_errors)
   " remember current makeprg and errorformat
   let l:makeprg=&makeprg
-  let l:efm=&errorformat
+  let l:errorformat=&errorformat
+
+  if exists('g:neomake_open_list')
+    let l:neomake_open_list=g:neomake_open_list
+  endif
+
   " temporary set makeprg
   let &makeprg=a:cmd
+
+  " tell neomake to open quickfix
+  let g:neomake_open_list=2
+
   " this is how gtest outputs errors
-  set errorformat=%f:%l:\ %m
-  " call Make (vim-dispatch)
+  if (a:highlight_errors)
+    set errorformat=%f:%l:\ %m
+  else
+    set errorformat=pleasedonotmatchanything " hacky, but working
+  endif
+
+  " call Make or Neomake
   silent execute a:wrapper
+
   " restore previous makeprg and errorformat
   let &makeprg=l:makeprg
-  let &errorformat=l:efm
+  let &errorformat=l:errorformat
+
+  if exists('l:neomake_open_list')
+    let g:neomake_open_list=l:neomake_open_list
+  endif
 endf
 
 " }}}
@@ -164,25 +183,18 @@ endf
 function! gtest#GTestRun()
   let l:cmd = s:GetFullCommand()
 
-  " Check if neomake is installed
+  " Try with neomake
   if exists(':Neomake')
-    call s:RunWithMake('Neomake!', l:cmd)
-  " Check if vim-dispatch is installed
+    call s:RunWithMake('Neomake!', l:cmd, g:gtest#highlight_failing_tests)
+  " Try with vim-dispatch
   elseif exists(':Dispatch')
-    if g:gtest#highlight_failing_tests
-      " Use Make if user want to highlight failing tests
-      call s:RunWithMake('Make', l:cmd)
-    else
-      " Use Dispatch otherwise
-      silent execute 'Dispatch ' . l:cmd
-    endif
+    call s:RunWithMake('Make', l:cmd, g:gtest#highlight_failing_tests)
   " Try with VimuxRunCommand
   elseif exists('VimuxRunCommand')
     if g:gtest#highlight_failing_tests
       call gtest#highlight#StartListening()
     endif
 
-    " Fallback to VimuxRunCommand if Dispatch isn't available
     call VimuxRunCommand(l:cmd)
   else
     if g:gtest#highlight_failing_tests
