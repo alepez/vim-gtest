@@ -60,7 +60,8 @@ function! s:GetTestNameFromFull(full)
 endfunction
 
 function! s:GetTestFullFromLine(line)
-  return substitute(a:line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
+  let l:result = substitute(a:line, '^TEST\s*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$', '\1.\2', '')
+  return l:result 
 endfunction
 
 function! gtest#ListTestCases(arg, line, pos)
