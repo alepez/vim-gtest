@@ -64,8 +64,7 @@ function! s:GetTestNameFromFull(full)
 endfunction
 
 function! s:GetTestFullFromLine(line)
-  l:result = substitute(a:line, '^TEST.*(\(.*\), *\(.*\)).*$', '\1.\2', '')
-  l:result = substitute(l:result, '^\s*\(.\{-}\)\s*$', '\1', '')
+  let l:result = substitute(a:line, '^TEST\s*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$', '\1.\2', '')
   return l:result 
 endfunction
 
