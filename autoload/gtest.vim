@@ -64,7 +64,13 @@ function! s:GetTestNameFromFull(full)
 endfunction
 
 function! s:GetTestFilterFromLine(line)
-  return substitute(a:line, '^TEST.*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$', '\1.\2', '')
+  let l:ms = matchlist(a:line, '^\(TEST\S*\)\s*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$')
+
+  if l:ms[1] == 'TEST_P'
+      return '*' . l:ms[2] . '.' . l:ms[3] . '*'
+  else
+      return l:ms[2] . '.' . l:ms[3]
+  endif
 endfunction
 
 function! gtest#ListTestCases(arg, line, pos)
