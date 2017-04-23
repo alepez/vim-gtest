@@ -63,7 +63,7 @@ function! s:GetTestNameFromFull(full)
   return split(a:full, '\.')[1]
 endfunction
 
-function! s:GetTestFullFromLine(line)
+function! s:GetTestFilterFromLine(line)
   return substitute(a:line, '^TEST.*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$', '\1.\2', '')
 endfunction
 
@@ -258,7 +258,7 @@ function! gtest#GTestUnderCursor(try_prev)
       throw "This line is not a test"
     endif
 
-    let l:full = s:GetTestFullFromLine(l:line)
+    let l:full = s:GetTestFilterFromLine(l:line)
     call s:SelectTestByFullName(l:full)
   catch
     if a:try_prev
