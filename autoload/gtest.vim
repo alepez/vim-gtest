@@ -193,11 +193,8 @@ endf
 function! gtest#GTestRun()
   let l:cmd = s:GetFullCommand()
 
-  " Try with neomake
-  if exists(':Neomake')
-    call s:RunWithMake('Neomake!', l:cmd, g:gtest#highlight_failing_tests)
   " Try with vim-dispatch
-  elseif exists(':Dispatch')
+  if exists(':Dispatch')
     call s:RunWithMake('Make', l:cmd, g:gtest#highlight_failing_tests)
   " Try with VimuxRunCommand
   elseif exists('VimuxRunCommand')
