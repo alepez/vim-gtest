@@ -151,11 +151,12 @@ fu! s:SelectTestByFullName(full)
   call gtest#GTestName(s:GetTestNameFromFull(a:full))
 endf
 
-fu! s:RunWithMake(wrapper, cmd, highlight_errors)
+fu! s:RunWithNeomake(cmd, highlight_errors)
   " remember current makeprg and errorformat
   let l:makeprg=&makeprg
   let l:errorformat=&errorformat
 
+  " Remember existing option before overriding it
   if exists('g:neomake_open_list')
     let l:neomake_open_list=g:neomake_open_list
   endif
@@ -173,8 +174,7 @@ fu! s:RunWithMake(wrapper, cmd, highlight_errors)
     set errorformat=pleasedonotmatchanything " hacky, but working
   endif
 
-  " call Make or Neomake
-  silent execute a:wrapper
+  execute "Neomake!"
 
   " restore previous makeprg and errorformat
   let &makeprg=l:makeprg
@@ -185,6 +185,29 @@ fu! s:RunWithMake(wrapper, cmd, highlight_errors)
   endif
 endf
 
+fu! s:RunWithDispatch(cmd, highlight_errors)
+  " remember current makeprg and errorformat
+  let l:makeprg=&makeprg
+  let l:errorformat=&errorformat
+
+  " temporary set makeprg
+  let &makeprg=a:cmd
+
+  " this is how gtest outputs errors
+  if (a:highlight_errors)
+    set errorformat=%f:%l:\ %m
+  else
+    set errorformat=pleasedonotmatchanything " hacky, but working
+  endif
+
+  silent execute "Make"
+
+  " restore previous makeprg and errorformat
+  let &makeprg=l:makeprg
+  let &errorformat=l:errorformat
+
+endf
+
 " }}}
 
 " Public functions {{{
@@ -193,9 +216,12 @@ endf
 function! gtest#GTestRun()
   let l:cmd = s:GetFullCommand()
 
+  " Try with neomake
+  if exists(':Neomake')
+    call s:RunWithNeomake(l:cmd, g:gtest#highlight_failing_tests)
   " Try with vim-dispatch
-  if exists(':Dispatch')
-    call s:RunWithMake('Make', l:cmd, g:gtest#highlight_failing_tests)
+  elseif exists(':Dispatch')
+    call s:RunWithDispatch(l:cmd, g:gtest#highlight_failing_tests)
   " Try with VimuxRunCommand
   elseif exists('VimuxRunCommand')
     if g:gtest#highlight_failing_tests
