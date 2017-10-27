@@ -115,11 +115,18 @@ You can switch from implementation to header to test:
 :GTestJump
 ```
 
-Filenames must follow this rule:
+By default, filenames must follow this rule:
 
  - implementation: `src/**/*.cpp`
  - header: `src/**/*.hpp`
  - test: `test/**/*_test.cpp`
+
+Test file suffix can be customized in vimrc using
+```
+let g:gtest#test_filename_suffix = "Test"
+```
+GTestJump will then look for test filename
+ - test: `test/**/*Test.cpp`
 
 ## Shortcuts
 
@@ -127,16 +134,16 @@ You can map these commands to your favorite shortcuts. These are mine:
 
 ```
 augroup GTest
-	autocmd FileType cpp nnoremap <silent> <leader>tt :GTestRun<CR>
-	autocmd FileType cpp nnoremap <silent> <leader>tu :GTestRunUnderCursor<CR>
-	autocmd FileType cpp nnoremap          <leader>tc :GTestCase<space>
-	autocmd FileType cpp nnoremap          <leader>tn :GTestName<space>
-	autocmd FileType cpp nnoremap <silent> <leader>te :GTestToggleEnabled<CR>
-	autocmd FileType cpp nnoremap <silent> ]T         :GTestNext<CR>
-	autocmd FileType cpp nnoremap <silent> [T         :GTestPrev<CR>
-	autocmd FileType cpp nnoremap <silent> <leader>tf :CtrlPGTest<CR>
-	autocmd FileType cpp nnoremap <silent> <leader>tj :GTestJump<CR>
-	autocmd FileType cpp nnoremap          <leader>ti :GTestNewTest<CR>i
+  autocmd FileType cpp nnoremap <silent> <leader>tt :GTestRun<CR>
+  autocmd FileType cpp nnoremap <silent> <leader>tu :GTestRunUnderCursor<CR>
+  autocmd FileType cpp nnoremap          <leader>tc :GTestCase<space>
+  autocmd FileType cpp nnoremap          <leader>tn :GTestName<space>
+  autocmd FileType cpp nnoremap <silent> <leader>te :GTestToggleEnabled<CR>
+  autocmd FileType cpp nnoremap <silent> ]T         :GTestNext<CR>
+  autocmd FileType cpp nnoremap <silent> [T         :GTestPrev<CR>
+  autocmd FileType cpp nnoremap <silent> <leader>tf :CtrlPGTest<CR>
+  autocmd FileType cpp nnoremap <silent> <leader>tj :GTestJump<CR>
+  autocmd FileType cpp nnoremap          <leader>ti :GTestNewTest<CR>i
 augroup END
 ```
 
