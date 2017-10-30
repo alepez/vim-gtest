@@ -115,11 +115,18 @@ You can switch from implementation to header to test:
 :GTestJump
 ```
 
-Filenames must follow this rule:
+By default, filenames must follow this rule:
 
  - implementation: `src/**/*.cpp`
  - header: `src/**/*.hpp`
  - test: `test/**/*_test.cpp`
+
+Test file suffix can be customized in vimrc using
+```
+let g:gtest#test_filename_suffix = "Test"
+```
+GTestJump will then look for test filename
+ - test: `test/**/*Test.cpp`
 
 ## Shortcuts
 

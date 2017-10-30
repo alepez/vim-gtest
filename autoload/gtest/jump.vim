@@ -6,12 +6,14 @@
 fu! s:GetBasename(path)
   let l:res = fnamemodify(a:path, ':r')
   let l:res = substitute(l:res, "^\[^/\]*/", "", "")
-  return substitute(l:res, "_test$", "", "")
+  let l:fns = g:gtest#test_filename_suffix
+  return substitute(l:res, l:fns . "$", "", "")
 endf
 
 fun! s:GetTestPath(path)
+  let l:fns = g:gtest#test_filename_suffix
   let l:base = s:GetBasename(a:path)
-  return "test/" . l:base . "_test.cpp"
+  return "test/" . l:base . l:fns . ".cpp"
 endf
 
 fun! s:GetHeaderPath(path)
@@ -25,7 +27,8 @@ fun! s:GetImplementationPath(path)
 endf
 
 fu! s:GetFileType(path)
-  if match(a:path, "_test.cpp$") != -1
+  let l:fns = g:gtest#test_filename_suffix
+  if match(a:path, l:fns . ".cpp$") != -1
     return 1
   elseif match(a:path, ".cpp$") != -1
     return 2
@@ -39,6 +42,7 @@ endf
 " src/<name>.cpp
 " src/<name>.hpp
 " test/<name>_test.cpp
+" Test file suffix '_test' can be customized using g:gtest#test_filename_suffix
 "
 fu! gtest#jump#FileJump()
   let l:path = expand("%")

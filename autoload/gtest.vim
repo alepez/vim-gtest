@@ -23,6 +23,9 @@ endif
 if !exists('g:gtest#highlight_failing_tests')
   let g:gtest#highlight_failing_tests = 0
 endif
+if !exists('g:gtest#test_filename_suffix')
+    let g:gtest#test_filename_suffix = '_test'
+endif
 " }}}
 
 " Private functions {{{
