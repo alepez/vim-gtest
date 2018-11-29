@@ -70,7 +70,7 @@ function! s:GetTestFilterFromLine(line)
   let l:ms = matchlist(a:line, '^\(TEST\S*\)\s*(\s*\(\S\{-1,}\),\s*\(\S\{-1,}\)\s*).*$')
 
   if l:ms[1] == 'TEST_P'
-      return '*' . l:ms[2] . '.' . l:ms[3] . '*'
+      return '*/' . l:ms[2] . '.' . l:ms[3] . '/*'
   else
       return l:ms[2] . '.' . l:ms[3]
   endif
