@@ -94,6 +94,11 @@ and launch tests at the speed of light!
 
 **Attention:** [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) must be installed.
 
+### FZF
+
+If you are using [FZF](https://github.com/junegunn/fzf.vim), `vim-gtest` extends *FZF* with a google test finder.
+Now you can find and launch tests at the speed of light!
+
 ### QuickFix
 
 You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
