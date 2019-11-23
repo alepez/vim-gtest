@@ -36,7 +36,11 @@ function! s:GetMiscArguments()
     let l:args = l:args . " --gtest_stream_result_to=localhost:2705"
   endif
 
-  let l:args = l:args . " --gtest_print_time=0"
+  if exists('g:gtest#print_time') && g:gtest#print_time
+    let l:args = l:args . " --gtest_print_time=1"
+  else
+    let l:args = l:args . " --gtest_print_time=0"
+  endif
 
   return l:args
 endfunction
