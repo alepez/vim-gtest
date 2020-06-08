@@ -72,6 +72,11 @@ It's a fantastic fuzzy finder for vim! Try it immediately! https://github.com/ct
 This plugin extends *ctrlp.vim* with a google test finder. Now you can find
 and launch tests at the speed of light!
 
+FZF                                                               *gtest-fzf*
+
+If you are using FZF (https://github.com/junegunn/fzf.vim), this plugin extends *FZF* with a google test finder. Now you can find
+and launch tests at the speed of light!
+
 QUICKFIX                                                       *gtest-quickfix*
 
 You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
