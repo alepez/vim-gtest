@@ -101,7 +101,8 @@ Now you can find and launch tests at the speed of light!
 
 ### QuickFix
 
-You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*.
+You can tell `vim-gtest` to highlight failing tests using vim's *QuickFix*. This
+is available only when vim is run from `tmux`.
 
 ```
 :let g:gtest#highlight_failing_tests = 1
