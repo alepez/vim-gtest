@@ -236,6 +236,9 @@ function! gtest#GTestRun()
     endif
 
     call VimuxRunCommand(l:cmd)
+  " Try with the tslime.vim plugin
+  elseif exists(':Tmux')
+    call Send_to_Tmux(l:cmd . "\n")
   else
     if g:gtest#highlight_failing_tests
       call gtest#highlight#StartListening()
