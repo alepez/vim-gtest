@@ -230,7 +230,7 @@ function! gtest#GTestRun()
   elseif exists(':Dispatch')
     call s:RunWithDispatch(l:cmd, g:gtest#highlight_failing_tests)
   " Try with VimuxRunCommand
-  elseif exists('VimuxRunCommand')
+  elseif exists(':VimuxRunCommand')
     if g:gtest#highlight_failing_tests
       call gtest#highlight#StartListening()
     endif
