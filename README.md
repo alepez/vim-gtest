@@ -83,6 +83,25 @@ struct MyTest : public testing::Test {
 :GTestRunUnderCursor
 ```
 
+### Run test with arbitrary runner
+
+By default, `vim-gtest` will sequentially try
+[neomake](https://github.com/neomake/neomake),
+[vim-dispatch](https://github.com/tpope/vim-dispatch),
+[vimux](https://github.com/preservim/vimux), and
+[tslime.vim](https://github.com/vim-scripts/tslime.vim) as the runner to
+execute tests. If you need to customize the runner, you can use the
+`g:gtest#gtest_runner` variable as shown below.
+
+```
+function CustomGTestRun(cmd)
+	" Use asyncrun.vim
+	exe ":AsyncRun -pos=tab -mode=term -focus=1 " . a:cmd
+endfunction
+
+let g:gtest#gtest_runner = function('CustomGTestRun')
+```
+
 ### CtrlP
 
 Don't you know what [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) is?

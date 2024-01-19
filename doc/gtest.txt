@@ -26,7 +26,16 @@ Set the executable which will be run:
 >
   let g:gtest#gtest_command = "./test"
 <
+                                                         *g:gtest#gtest_runner*
+Set custom runner if you need it:
+>
+  function CustomGTestRun(cmd)
+    " Use asyncrun.vim
+    exe ":AsyncRun -pos=tab -mode=term -focus=1 " . a:cmd
+  endfunction
 
+  let g:gtest#gtest_runner = function('CustomGTestRun')
+<
                                               *g:gtest#highlight_failing_tests*
 Set this to 1 if you want enable failing tests highlight.
 >
