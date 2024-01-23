@@ -56,7 +56,7 @@ endfunction
 function! s:GetFullCommand()
   let l:cmd = g:gtest#gtest_command . " " . s:GetArguments()
   if !has("gui_running")
-    return "( clear && " . l:cmd . ")"
+    return "( clear ; " . l:cmd . ")"
   else
     return "(" . l:cmd . ")"
   endif
