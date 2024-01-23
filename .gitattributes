@@ -1,0 +1,6 @@
+.gitignore text eol=lf
+README.md text eol=lf
+*.vim text eol=lf
+*.txt text eol=lf
+test/launch text eol=lf
+test/make_test text eol=lf
