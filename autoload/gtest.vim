@@ -223,8 +223,11 @@ endf
 function! gtest#GTestRun()
   let l:cmd = s:GetFullCommand()
 
+  " Try with user defined runner
+  if exists('g:gtest#gtest_runner')
+    call g:gtest#gtest_runner(l:cmd)
   " Try with neomake
-  if exists(':Neomake')
+  elseif exists(':Neomake')
     call s:RunWithNeomake(l:cmd, g:gtest#highlight_failing_tests)
   " Try with vim-dispatch
   elseif exists(':Dispatch')
